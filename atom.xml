@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.tablu.com/"/>
-  <updated>2020-07-17T01:52:04.579Z</updated>
+  <updated>2020-07-17T15:20:58.661Z</updated>
   <id>http://blog.tablu.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://blog.tablu.com/uncategorized/hello-world/"/>
-    <id>http://blog.tablu.com/uncategorized/hello-world/</id>
-    <published>2020-07-17T01:52:04.579Z</published>
-    <updated>2020-07-17T01:52:04.579Z</updated>
+    <title>A Little Thought</title>
+    <link href="http://blog.tablu.com/Diary/a-little-thought/"/>
+    <id>http://blog.tablu.com/Diary/a-little-thought/</id>
+    <published>2020-07-17T21:42:13.000Z</published>
+    <updated>2020-07-17T15:20:58.661Z</updated>
     
     <summary type="html">
     
@@ -29,13 +29,17 @@
       
         
         
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+          &lt;p&gt;Welcome to my blog! I will share code, movies and everything that matters in life here. Hope you guys enjoy
         
       
     
     </summary>
     
     
+      <category term="Diary" scheme="http://blog.tablu.com/categories/Diary/"/>
+    
+    
+      <category term="Life" scheme="http://blog.tablu.com/tags/Life/"/>
     
   </entry>
   
