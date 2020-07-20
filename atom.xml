@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.tablu.com/"/>
-  <updated>2020-07-18T14:45:43.728Z</updated>
+  <updated>2020-07-20T10:45:19.280Z</updated>
   <id>http://blog.tablu.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hibernate learning 2</title>
+    <link href="http://blog.tablu.com/Techniques/hibernate-learning-2/"/>
+    <id>http://blog.tablu.com/Techniques/hibernate-learning-2/</id>
+    <published>2020-07-20T14:50:54.000Z</published>
+    <updated>2020-07-20T10:45:19.280Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Hibernate学习（二）&quot;&gt;&lt;a href=&quot;#Hibernate学习（二）&quot; class=&quot;headerlink&quot; title=&quot;Hibernate学习（二）&quot;&gt;&lt;/a&gt;Hibernate学习（二）&lt;/h2&gt;&lt;p&gt;今天主要学习Hibernate的对象状态、缓存以及事务操作。&lt;/p&gt;
+&lt;h3 id=&quot;实体类规则&quot;&gt;&lt;a href=&quot;#实体类规则&quot; class=&quot;headerlink&quot; title=&quot;实体类规则&quot;&gt;&lt;/a&gt;实体类规则&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;属性私有&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;有get和set方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;有属性作为唯一值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;用基本数据类型的包装类&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Techniques" scheme="http://blog.tablu.com/categories/Techniques/"/>
+    
+    
+      <category term="Code" scheme="http://blog.tablu.com/tags/Code/"/>
+    
+  </entry>
   
   <entry>
     <title>hibernate learning 1</title>
