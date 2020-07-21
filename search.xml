@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>A Little Thought About Life</title>
-    <url>/Diary/a-little-thought/</url>
-    <content><![CDATA[<p>Welcome to my blog! I will share code, movies and everything that matters in life here. Hope you guys enjoy it.</p>
-<p>欢迎来到我的博客！在这里，我将分享代码、电影以及生命中所有有意义的东西，希望你没白来。</p>
-<a id="more"></a>
-<hr>
-<h4 id="“Life-is-a-mystery”"><a href="#“Life-is-a-mystery”" class="headerlink" title="“Life is a mystery”"></a>“Life is a mystery”</h4><p>本人如今二十又六，还没活明白。不知道平行时空中的某个我悟出来啥了不。</p>
-<h4 id="“Life-is-hard”"><a href="#“Life-is-hard”" class="headerlink" title="“Life is hard”"></a>“Life is hard”</h4><p>人生路漫漫，从出生那一刻起就要打怪升级，小升初、中考、高考、考研还有社会考试，从未停歇也不敢停歇。</p>
-<h4 id="“Life-is-beautiful”"><a href="#“Life-is-beautiful”" class="headerlink" title="“Life is beautiful”"></a>“Life is beautiful”</h4><p>《美丽人生》中被关在犹太人集中营里的父亲，看不到未来、生活黑暗如斯却依然努力给儿子创造快乐。</p>
-<h4 id="“Life-is-full-of-choices”"><a href="#“Life-is-full-of-choices”" class="headerlink" title="“Life is full of choices”"></a>“Life is full of choices”</h4><p>人生处处是选择，选择往往比努力更重要，有时候一步错步步错（唉），想要挽回费时又费力。</p>
-<h4 id="“Life-is-all-about-sacrifice”"><a href="#“Life-is-all-about-sacrifice”" class="headerlink" title="“Life is all about sacrifice”"></a>“Life is all about sacrifice”</h4><p>生命的意义就是奉献和牺牲？父母穷尽一生为我们开辟道路，我们竭尽所能为后代创造平台。</p>
-<h4 id="“Life-is-not-fair”"><a href="#“Life-is-not-fair”" class="headerlink" title="“Life is not fair”"></a>“Life is not fair”</h4><p>有些人的起点是我们的终点，所以平常心很重要——事能知足心常泰，人到无求品自高。</p>
-<hr>
-<p>说这些，是想告诫自己，生命不息，奋斗不止，逆水行舟总是不进则退，身在时代的大洪流中只能<strong>struggle</strong>让自己不被淘汰。我也时常在想如果早些年明白这些道理现在会不会轻松一点，然而选择的机会只有一次。</p>
-<blockquote><p>少年不识愁滋味，爱上层楼。爱上层楼，为赋新词强说愁。<br>而今识尽愁滋味，欲说还休。欲说还休，却道天凉好个秋。</p>
-<footer><strong>辛弃疾</strong><cite>丑奴儿·书博山道中壁</cite></footer></blockquote>]]></content>
-      <categories>
-        <category>Diary</category>
-      </categories>
-      <tags>
-        <tag>Life</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hibernate learning 1</title>
     <url>/Techniques/hibernate-learning-1/</url>
     <content><![CDATA[<h2 id="Hibernate-学习（一）"><a href="#Hibernate-学习（一）" class="headerlink" title="Hibernate 学习（一）"></a>Hibernate 学习（一）</h2><h3 id="Hibernate简介"><a href="#Hibernate简介" class="headerlink" title="Hibernate简介"></a>Hibernate简介</h3><p>Hibernate是一个开源ORM框架，底层是JDBC，应用于JavaEE的dao层，优点是不用写SQL，缺点是涉及SQL级别的调优学习成本高。</p>
@@ -61,6 +37,30 @@
       </categories>
       <tags>
         <tag>Hibernate</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>A Little Thought About Life</title>
+    <url>/Diary/a-little-thought/</url>
+    <content><![CDATA[<p>Welcome to my blog! I will share code, movies and everything that matters in life here. Hope you guys enjoy it.</p>
+<p>欢迎来到我的博客！在这里，我将分享代码、电影以及生命中所有有意义的东西，希望你没白来。</p>
+<a id="more"></a>
+<hr>
+<h4 id="“Life-is-a-mystery”"><a href="#“Life-is-a-mystery”" class="headerlink" title="“Life is a mystery”"></a>“Life is a mystery”</h4><p>本人如今二十又六，还没活明白。不知道平行时空中的某个我悟出来啥了不。</p>
+<h4 id="“Life-is-hard”"><a href="#“Life-is-hard”" class="headerlink" title="“Life is hard”"></a>“Life is hard”</h4><p>人生路漫漫，从出生那一刻起就要打怪升级，小升初、中考、高考、考研还有社会考试，从未停歇也不敢停歇。</p>
+<h4 id="“Life-is-beautiful”"><a href="#“Life-is-beautiful”" class="headerlink" title="“Life is beautiful”"></a>“Life is beautiful”</h4><p>《美丽人生》中被关在犹太人集中营里的父亲，看不到未来、生活黑暗如斯却依然努力给儿子创造快乐。</p>
+<h4 id="“Life-is-full-of-choices”"><a href="#“Life-is-full-of-choices”" class="headerlink" title="“Life is full of choices”"></a>“Life is full of choices”</h4><p>人生处处是选择，选择往往比努力更重要，有时候一步错步步错（唉），想要挽回费时又费力。</p>
+<h4 id="“Life-is-all-about-sacrifice”"><a href="#“Life-is-all-about-sacrifice”" class="headerlink" title="“Life is all about sacrifice”"></a>“Life is all about sacrifice”</h4><p>生命的意义就是奉献和牺牲？父母穷尽一生为我们开辟道路，我们竭尽所能为后代创造平台。</p>
+<h4 id="“Life-is-not-fair”"><a href="#“Life-is-not-fair”" class="headerlink" title="“Life is not fair”"></a>“Life is not fair”</h4><p>有些人的起点是我们的终点，所以平常心很重要——事能知足心常泰，人到无求品自高。</p>
+<hr>
+<p>说这些，是想告诫自己，生命不息，奋斗不止，逆水行舟总是不进则退，身在时代的大洪流中只能<strong>struggle</strong>让自己不被淘汰。我也时常在想如果早些年明白这些道理现在会不会轻松一点，然而选择的机会只有一次。</p>
+<blockquote><p>少年不识愁滋味，爱上层楼。爱上层楼，为赋新词强说愁。<br>而今识尽愁滋味，欲说还休。欲说还休，却道天凉好个秋。</p>
+<footer><strong>辛弃疾</strong><cite>丑奴儿·书博山道中壁</cite></footer></blockquote>]]></content>
+      <categories>
+        <category>Diary</category>
+      </categories>
+      <tags>
+        <tag>Life</tag>
       </tags>
   </entry>
   <entry>
