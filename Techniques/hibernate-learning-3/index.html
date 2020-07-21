@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-doge.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-doge.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.tablu.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Hibernate学习（三）今天主要学习Hibernate的多表操作。本菜鸡学习Hibernate的初衷是懒得用SQL，既然可以让Hibernate工具人帮忙建表并且进行级联操作，何乐而不为呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hibernate learning 3">
+<meta property="og:url" content="http://blog.tablu.com/Techniques/hibernate-learning-3/index.html">
+<meta property="og:site_name" content="TABLU BLOG">
+<meta property="og:description" content="Hibernate学习（三）今天主要学习Hibernate的多表操作。本菜鸡学习Hibernate的初衷是懒得用SQL，既然可以让Hibernate工具人帮忙建表并且进行级联操作，何乐而不为呢？">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.tablu.com/Techniques/hibernate-learning-3/testFK.png">
+<meta property="og:image" content="http://blog.tablu.com/Techniques/hibernate-learning-3/testFK2.png">
+<meta property="og:image" content="http://blog.tablu.com/Techniques/hibernate-learning-3/FKdelRes.png">
+<meta property="article:published_time" content="2020-07-21T19:18:50.000Z">
+<meta property="article:modified_time" content="2020-07-21T12:55:30.835Z">
+<meta property="article:author" content="Tianbo Lu">
+<meta property="article:tag" content="Hibernate">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.tablu.com/Techniques/hibernate-learning-3/testFK.png">
+
+<link rel="canonical" href="http://blog.tablu.com/Techniques/hibernate-learning-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>hibernate learning 3 | TABLU BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TABLU BLOG" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TABLU BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">life is too short to not live wild</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://blog.tablu.com/Techniques/hibernate-learning-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Tianbo Lu">
+      <meta itemprop="description" content="code, movie & life.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TABLU BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hibernate learning 3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-21 19:18:50 / Modified: 12:55:30" itemprop="dateCreated datePublished" datetime="2020-07-21T19:18:50Z">2020-07-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Techniques/" itemprop="url" rel="index"><span itemprop="name">Techniques</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Hibernate学习（三）"><a href="#Hibernate学习（三）" class="headerlink" title="Hibernate学习（三）"></a>Hibernate学习（三）</h2><p>今天主要学习Hibernate的多表操作。本菜鸡学习Hibernate的初衷是懒得用SQL，既然可以让Hibernate工具人帮忙建表并且进行级联操作，何乐而不为呢？</p>
+<a id="more"></a>
+<h3 id="多表关系回顾"><a href="#多表关系回顾" class="headerlink" title="多表关系回顾"></a>多表关系回顾</h3><h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><ul>
+<li>从属关系，主表和从表。</li>
+<li>一对多建表，通过外键建立关系。</li>
+<li>员工管理表：一个部门有多名员工，一个员工只属于一个部门。<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4></li>
+<li>多对多建表，通过第三张表维护关系</li>
+<li>商品订单表：一个商品有多个订单，一个订单有多个商品。</li>
+</ul>
+<h3 id="Hibernate一对多操作"><a href="#Hibernate一对多操作" class="headerlink" title="Hibernate一对多操作"></a>Hibernate一对多操作</h3><h4 id="创建实体类"><a href="#创建实体类" class="headerlink" title="创建实体类"></a>创建实体类</h4><p>这里我用Customer（公司的客户）作为主表对应的实体类，Contact（对接联系人）作为从表对应的实体类，即一个客户里有多个联系人，一个联系人只属于一个客户（公司）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//客户id</span></span><br><span class="line">    <span class="keyword">private</span> Integer cid;</span><br><span class="line">    <span class="comment">//客户名称</span></span><br><span class="line">    <span class="keyword">private</span> String cusName;</span><br><span class="line">    <span class="comment">//客户级别</span></span><br><span class="line">    <span class="keyword">private</span> String cusLevel;</span><br><span class="line">    <span class="comment">//客户来源</span></span><br><span class="line">    <span class="keyword">private</span> String cusSource;</span><br><span class="line">    <span class="comment">//客户电话</span></span><br><span class="line">    <span class="keyword">private</span> String cusPhone;</span><br><span class="line">    <span class="comment">//客户手机</span></span><br><span class="line">    <span class="keyword">private</span> String cusMobile;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    在客户实体类里表示多个联系人</span></span><br><span class="line"><span class="comment">    一个客户有多个联系人</span></span><br><span class="line"><span class="comment">    hibernate要求使用set集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;Contact&gt; contacts = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Contact&gt; <span class="title">getContacts</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> contacts;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContacts</span><span class="params">(Set&lt;Contact&gt; contacts)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.contacts = contacts;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getCid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCid</span><span class="params">(Integer cid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cid = cid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCusName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cusName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCusName</span><span class="params">(String cusName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cusName = cusName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCusLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cusLevel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCusLevel</span><span class="params">(String cusLevel)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cusLevel = cusLevel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCusSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cusSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCusSource</span><span class="params">(String cusSource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cusSource = cusSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCusPhone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cusPhone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCusPhone</span><span class="params">(String cusPhone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cusPhone = cusPhone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCusMobile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cusMobile;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCusMobile</span><span class="params">(String cusMobile)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cusMobile = cusMobile;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里跟MyBatis相似，建立实体类的关系通过类属性设置集合来完成，Hibernate规定是Set集合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Contact</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer con_id;<span class="comment">//联系人编号</span></span><br><span class="line">    <span class="keyword">private</span> String con_name;<span class="comment">//联系人姓名</span></span><br><span class="line">    <span class="keyword">private</span> String con_gender;<span class="comment">//联系人性别</span></span><br><span class="line">    <span class="keyword">private</span> String con_phone;<span class="comment">//联系人电话</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//联系人实体类里表示所属客户，一个联系人对应一个客户</span></span><br><span class="line">    <span class="keyword">private</span> Customer customer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Customer <span class="title">getCustomer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCustomer</span><span class="params">(Customer customer)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.customer = customer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getCon_id</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> con_id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCon_id</span><span class="params">(Integer con_id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.con_id = con_id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCon_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> con_name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCon_name</span><span class="params">(String con_name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.con_name = con_name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCon_gender</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> con_gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCon_gender</span><span class="params">(String con_gender)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.con_gender = con_gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCon_phone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> con_phone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCon_phone</span><span class="params">(String con_phone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.con_phone = con_phone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从表实体类需要设置对应的主表实体类。</p>
+<h4 id="配置映射关系"><a href="#配置映射关系" class="headerlink" title="配置映射关系"></a>配置映射关系</h4><p>分别设置两个实体类的映射文件Customer.xml和Contact.xml</p>
+<h5 id="Customer-xml的配置"><a href="#Customer-xml的配置" class="headerlink" title="Customer.xml的配置"></a>Customer.xml的配置</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.ltb.bean.Customer"</span> <span class="attr">table</span>=<span class="string">"table_customer"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"cid"</span> <span class="attr">column</span>=<span class="string">"cid"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cusName"</span> <span class="attr">column</span>=<span class="string">"customer_name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cusLevel"</span> <span class="attr">column</span>=<span class="string">"customer_level"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cusSource"</span> <span class="attr">column</span>=<span class="string">"customer_source"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cusPhone"</span> <span class="attr">column</span>=<span class="string">"customer_phone"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cusMobile"</span> <span class="attr">column</span>=<span class="string">"customer_mobile"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- Hibernate双向维护外键，配置一对多外键名称 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"contacts"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"ccid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">one-to-many</span> <span class="attr">class</span>=<span class="string">"com.ltb.bean.Contact"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>主表的配置需要设置双向维护的外键，注明外键列名：ccid，一对多的实体类全类名。注意这里的set中的name是User类中的Set集合变量名。</p>
+<h5 id="Contact-xml的配置"><a href="#Contact-xml的配置" class="headerlink" title="Contact.xml的配置"></a>Contact.xml的配置</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.ltb.bean.Contact"</span> <span class="attr">table</span>=<span class="string">"table_contact"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"con_id"</span> <span class="attr">column</span>=<span class="string">"contact_id"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"con_name"</span> <span class="attr">column</span>=<span class="string">"contact_name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"con_gender"</span> <span class="attr">column</span>=<span class="string">"contact_gender"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"con_phone"</span> <span class="attr">column</span>=<span class="string">"contact_phone"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 表示联系人所属客户 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">many-to-one</span> <span class="attr">name</span>=<span class="string">"customer"</span> <span class="attr">class</span>=<span class="string">"com.ltb.bean.Customer"</span> <span class="attr">column</span>=<span class="string">"ccid"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>从表需要配置多对一的实体类全类名。</p>
+<h4 id="配置主文件映射"><a href="#配置主文件映射" class="headerlink" title="配置主文件映射"></a>配置主文件映射</h4><p>在hibernate.cfg.xml中加入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"mapper/Contact.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"mapper/Customer.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="测试一对多操作"><a href="#测试一对多操作" class="headerlink" title="测试一对多操作"></a>测试一对多操作</h4><h5 id="编写工具类"><a href="#编写工具类" class="headerlink" title="编写工具类"></a>编写工具类</h5><p>首先写个工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SessionFactoryUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        Configuration cfg = <span class="keyword">new</span> Configuration();</span><br><span class="line">        cfg.configure();</span><br><span class="line">        sessionFactory = cfg.buildSessionFactory();</span><br><span class="line">        System.out.println(<span class="string">"init SessionFactory...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SessionFactory <span class="title">getSessionFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sessionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sessionFactory.getCurrentSession();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//用于建表到数据库</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行主程序，查看结果。<br><img src="testFK.png" alt="testFK"><br><img src="testFK2.png" alt="testFK2"><br>可以看到数据库建表成功，并且控制台也显示从表建立了外键。<br>写个OneToManyTest测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneToManyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Session session;</span><br><span class="line">    <span class="keyword">private</span> Transaction tx;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        session = SessionFactoryUtils.getSession();</span><br><span class="line">        tx = session.beginTransaction();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h5><h6 id="复杂方式"><a href="#复杂方式" class="headerlink" title="复杂方式"></a>复杂方式</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个客户</span></span><br><span class="line">        Customer customer = <span class="keyword">new</span> Customer();</span><br><span class="line">        customer.setCusName(<span class="string">"Alibaba"</span>);</span><br><span class="line">        customer.setCusLevel(<span class="string">"vip"</span>);</span><br><span class="line">        customer.setCusMobile(<span class="string">"186"</span>);</span><br><span class="line">        customer.setCusPhone(<span class="string">"8788"</span>);</span><br><span class="line">        customer.setCusSource(<span class="string">"internet"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个联系人</span></span><br><span class="line">        Contact contact = <span class="keyword">new</span> Contact();</span><br><span class="line">        contact.setCon_name(<span class="string">"Tom"</span>);</span><br><span class="line">        contact.setCon_gender(<span class="string">"male"</span>);</span><br><span class="line">        contact.setCon_phone(<span class="string">"8788"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//建立关系</span></span><br><span class="line">        customer.getContacts().add(contact);</span><br><span class="line">        contact.setCustomer(customer);</span><br><span class="line"></span><br><span class="line">        session.save(customer);</span><br><span class="line">        session.save(contact);</span><br><span class="line">        tx.commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        tx.rollback();</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不进行额外配置的情况下进行级联保存，那么需要双向设置，即customer中加入contacts，contact中加入customer，然后分别调用save()。</p>
+<h6 id="简单方式"><a href="#简单方式" class="headerlink" title="简单方式"></a>简单方式</h6><p>首先配置主表配置文件Customer.xml，然后加入cascade=”save-update”。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"contacts"</span> <span class="attr">cascade</span>=<span class="string">"save-update"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再写个方法测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 配置 cascade="save-update"</span></span><br><span class="line"><span class="comment"> * 简易一对多级联保存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsert2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//创建一个客户</span></span><br><span class="line">        Customer customer = <span class="keyword">new</span> Customer();</span><br><span class="line">        customer.setCusName(<span class="string">"Tencent"</span>);</span><br><span class="line">        customer.setCusLevel(<span class="string">"vip"</span>);</span><br><span class="line">        customer.setCusMobile(<span class="string">"139"</span>);</span><br><span class="line">        customer.setCusPhone(<span class="string">"8700"</span>);</span><br><span class="line">        customer.setCusSource(<span class="string">"internet"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个联系人</span></span><br><span class="line">        Contact contact = <span class="keyword">new</span> Contact();</span><br><span class="line">        contact.setCon_name(<span class="string">"Jerry"</span>);</span><br><span class="line">        contact.setCon_gender(<span class="string">"male"</span>);</span><br><span class="line">        contact.setCon_phone(<span class="string">"8700"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//建立关系，只需执行save操作主表实体类</span></span><br><span class="line">        customer.getContacts().add(contact);</span><br><span class="line">        session.save(customer);</span><br><span class="line">        tx.commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        tx.rollback();</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><p>删除同样需要在配置Customer.xml中加入cascade=”delete”，用逗号隔开即可。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"contacts"</span> <span class="attr">cascade</span>=<span class="string">"save-update,delete"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Customer customer = session.get(Customer<span class="class">.<span class="keyword">class</span>, 2)</span>;</span><br><span class="line">        session.delete(customer);</span><br><span class="line">        tx.commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        tx.rollback();</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="FKdelRes.png" alt="FKdelRes"><br>注意！如果没有配置直接调用delete方法会失败，原因是存在外键，实际上根据控制台打印的信息也可以看到Hibernate是先将外键置为null再进行两个表的删除操作。</p>
+<h5 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h5><p>修改操作就是修改持久态对象的属性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Contact contact = session.get(Contact<span class="class">.<span class="keyword">class</span>, 3)</span>;</span><br><span class="line">        Customer customer = session.get(Customer<span class="class">.<span class="keyword">class</span>, 3)</span>;</span><br><span class="line">        customer.getContacts().add(contact);</span><br><span class="line">        contact.setCustomer(customer);</span><br><span class="line">        tx.commit();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        tx.rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改操作同样也需要配置，因为Hibernate双向维护外键，修改Customer时修改一次外键，修改Contact时也修改一次外键，造成效率问题。因此要让主表放弃外键维护，在Customer.xml修改inverse属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"contacts"</span> <span class="attr">cascade</span>=<span class="string">"save-update,delete"</span> <span class="attr">inverse</span>=<span class="string">"true"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Hibernate多对多操作"><a href="#Hibernate多对多操作" class="headerlink" title="Hibernate多对多操作"></a>Hibernate多对多操作</h3><p>创建User表和Role表，一个用户有多个角色，一个角色可以分配个多个用户。</p>
+<h4 id="创建实体类-1"><a href="#创建实体类-1" class="headerlink" title="创建实体类"></a>创建实体类</h4><p>编写User实体类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer uid;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Set&lt;Role&gt; roles = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Role&gt; <span class="title">getRoles</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoles</span><span class="params">(Set&lt;Role&gt; roles)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.roles = roles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getUid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUid</span><span class="params">(Integer uid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.uid = uid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编写Role实体类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer rid;</span><br><span class="line">    <span class="keyword">private</span> String roleName;</span><br><span class="line">    <span class="keyword">private</span> String roleMemo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Set&lt;User&gt; users = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;User&gt; <span class="title">getUsers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> users;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsers</span><span class="params">(Set&lt;User&gt; users)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.users = users;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getRid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> rid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRid</span><span class="params">(Integer rid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.rid = rid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRoleName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roleName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoleName</span><span class="params">(String roleName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.roleName = roleName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRoleMemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> roleMemo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoleMemo</span><span class="params">(String roleMemo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.roleMemo = roleMemo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类似于一对多，两个实体类都要为对方创建Set集合的属性值。</p>
+<h4 id="配置映射关系-1"><a href="#配置映射关系-1" class="headerlink" title="配置映射关系"></a>配置映射关系</h4><p>配置User.xml。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.ltb.bean.User"</span> <span class="attr">table</span>=<span class="string">"table_user"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"uid"</span> <span class="attr">column</span>=<span class="string">"uid"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">column</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">column</span>=<span class="string">"password"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span> <span class="attr">table</span>=<span class="string">"t_user_role"</span> <span class="attr">cascade</span>=<span class="string">"save-update"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 配置在第三张表的外键名称 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"uid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">"com.ltb.bean.Role"</span> <span class="attr">column</span>=<span class="string">"rid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里需要在set里面设置上第三章表的名字，以及外键对应的列名。注意两边的列名要对应起来。<br>Role.xml也是一样。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-mapping</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"com.ltb.bean.Role"</span> <span class="attr">table</span>=<span class="string">"table_role"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"rid"</span> <span class="attr">column</span>=<span class="string">"rid"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"roleName"</span> <span class="attr">column</span>=<span class="string">"role_name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"roleMemo"</span> <span class="attr">column</span>=<span class="string">"role_memo"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"users"</span> <span class="attr">table</span>=<span class="string">"t_user_role"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"rid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">"com.ltb.bean.User"</span> <span class="attr">column</span>=<span class="string">"uid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在主配置文件hibernate.cfg.xml中加入对应的mapping映射。（学到这里我很好奇，Hibernate应该是支持直接映射包名才对，类似于MyBatis的package）</p>
+<h4 id="测试多对多操作"><a href="#测试多对多操作" class="headerlink" title="测试多对多操作"></a>测试多对多操作</h4><p>这里直接贴上整个测试类，原理和一对多大同小异。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManyToMany</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Session session;</span><br><span class="line">    <span class="keyword">private</span> Transaction tx;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        session = SessionFactoryUtils.getSession();</span><br><span class="line">        tx = session.beginTransaction();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试多对多级联保存</span></span><br><span class="line"><span class="comment">     * User配置 cascade="save-update"</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            User user1 = <span class="keyword">new</span> User();</span><br><span class="line">            User user2 = <span class="keyword">new</span> User();</span><br><span class="line">            Role role1 = <span class="keyword">new</span> Role();</span><br><span class="line">            Role role2 = <span class="keyword">new</span> Role();</span><br><span class="line">            Role role3 = <span class="keyword">new</span> Role();</span><br><span class="line"></span><br><span class="line">            user1.setUsername(<span class="string">"Jimmy"</span>);</span><br><span class="line">            user1.setPassword(<span class="string">"123"</span>);</span><br><span class="line">            user2.setUsername(<span class="string">"Mike"</span>);</span><br><span class="line">            user2.setPassword(<span class="string">"456"</span>);</span><br><span class="line"></span><br><span class="line">            role1.setRoleName(<span class="string">"Man"</span>);</span><br><span class="line">            role1.setRoleMemo(<span class="string">"Responsibility"</span>);</span><br><span class="line">            role2.setRoleName(<span class="string">"Security"</span>);</span><br><span class="line">            role2.setRoleMemo(<span class="string">"Gun"</span>);</span><br><span class="line">            role3.setRoleName(<span class="string">"Lawyer"</span>);</span><br><span class="line">            role3.setRoleMemo(<span class="string">"Law"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//直接在User设置Role进行关联</span></span><br><span class="line">            user1.getRoles().add(role1);</span><br><span class="line">            user1.getRoles().add(role3);</span><br><span class="line">            user2.getRoles().add(role1);</span><br><span class="line">            user2.getRoles().add(role2);</span><br><span class="line"></span><br><span class="line">            session.save(user1);</span><br><span class="line">            session.save(user2);</span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            tx.rollback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改表中数据</span></span><br><span class="line"><span class="comment">     * uid=1的记录增加rid=3</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Role role = session.get(Role<span class="class">.<span class="keyword">class</span>, 3)</span>;</span><br><span class="line">            User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line">            user.getRoles().add(role);</span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            tx.rollback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除表中数据</span></span><br><span class="line"><span class="comment">     * uid=1的记录删除rid=3</span></span><br><span class="line"><span class="comment">     * 注意删除不要用delete</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Role role = session.get(Role<span class="class">.<span class="keyword">class</span>, 3)</span>;</span><br><span class="line">            User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line">            user.getRoles().remove(role);</span><br><span class="line">            tx.commit();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            tx.rollback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="保存-1"><a href="#保存-1" class="headerlink" title="保存"></a>保存</h5><p>因为配置了cascade=”save-update”，直接在User设置Role进行关联即可。</p>
+<h5 id="修改-amp-删除"><a href="#修改-amp-删除" class="headerlink" title="修改&amp;删除"></a>修改&amp;删除</h5><p>注意这里不能直接用delete，否则删除的不只是关系，还是一整个条目（毕竟是多对多）。应该充分利用Hibernate持久态对象的特点，从Session中get之后直接修改其Set集合。这样操作的好处是只维护第三张关系表，较为安全。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Techniques/hibernate-learning-2/" rel="prev" title="hibernate learning 2">
+      <i class="fa fa-chevron-left"></i> hibernate learning 2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate学习（三）"><span class="nav-number">1.</span> <span class="nav-text">Hibernate学习（三）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表关系回顾"><span class="nav-number">1.1.</span> <span class="nav-text">多表关系回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一对多"><span class="nav-number">1.1.1.</span> <span class="nav-text">一对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对多"><span class="nav-number">1.1.2.</span> <span class="nav-text">多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate一对多操作"><span class="nav-number">1.2.</span> <span class="nav-text">Hibernate一对多操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建实体类"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建实体类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置映射关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置映射关系</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Customer-xml的配置"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Customer.xml的配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Contact-xml的配置"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Contact.xml的配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置主文件映射"><span class="nav-number">1.2.3.</span> <span class="nav-text">配置主文件映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试一对多操作"><span class="nav-number">1.2.4.</span> <span class="nav-text">测试一对多操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写工具类"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">编写工具类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#保存"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">保存</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#复杂方式"><span class="nav-number">1.2.4.2.1.</span> <span class="nav-text">复杂方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#简单方式"><span class="nav-number">1.2.4.2.2.</span> <span class="nav-text">简单方式</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate多对多操作"><span class="nav-number">1.3.</span> <span class="nav-text">Hibernate多对多操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建实体类-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建实体类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置映射关系-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">配置映射关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试多对多操作"><span class="nav-number">1.3.3.</span> <span class="nav-text">测试多对多操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#保存-1"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">保存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改-amp-删除"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">修改&amp;删除</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianbo Lu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Tianbo Lu</p>
+  <div class="site-description" itemprop="description">code, movie & life.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tablu666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tablu666" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tablu666@outlook.com" title="E-Mail → mailto:tablu666@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/tianbo-lu-230511104" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;tianbo-lu-230511104" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>LinkedIn</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com&#x2F;" rel="noopener" target="_blank">google</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianbo Lu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

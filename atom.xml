@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.tablu.com/"/>
-  <updated>2020-07-20T10:45:19.280Z</updated>
+  <updated>2020-07-21T12:55:30.835Z</updated>
   <id>http://blog.tablu.com/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hibernate learning 3</title>
+    <link href="http://blog.tablu.com/Techniques/hibernate-learning-3/"/>
+    <id>http://blog.tablu.com/Techniques/hibernate-learning-3/</id>
+    <published>2020-07-21T19:18:50.000Z</published>
+    <updated>2020-07-21T12:55:30.835Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Hibernate学习（三）&quot;&gt;&lt;a href=&quot;#Hibernate学习（三）&quot; class=&quot;headerlink&quot; title=&quot;Hibernate学习（三）&quot;&gt;&lt;/a&gt;Hibernate学习（三）&lt;/h2&gt;&lt;p&gt;今天主要学习Hibernate的多表操作。本菜鸡学习Hibernate的初衷是懒得用SQL，既然可以让Hibernate工具人帮忙建表并且进行级联操作，何乐而不为呢？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Techniques" scheme="http://blog.tablu.com/categories/Techniques/"/>
+    
+    
+      <category term="Hibernate" scheme="http://blog.tablu.com/tags/Hibernate/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hibernate learning 2</title>
     <link href="http://blog.tablu.com/Techniques/hibernate-learning-2/"/>
     <id>http://blog.tablu.com/Techniques/hibernate-learning-2/</id>
     <published>2020-07-20T14:50:54.000Z</published>
-    <updated>2020-07-20T10:45:19.280Z</updated>
+    <updated>2020-07-21T02:05:36.851Z</updated>
     
     <summary type="html">
     
@@ -43,7 +64,7 @@
       <category term="Techniques" scheme="http://blog.tablu.com/categories/Techniques/"/>
     
     
-      <category term="Code" scheme="http://blog.tablu.com/tags/Code/"/>
+      <category term="Hibernate" scheme="http://blog.tablu.com/tags/Hibernate/"/>
     
   </entry>
   
@@ -52,7 +73,7 @@
     <link href="http://blog.tablu.com/Techniques/hibernate-learning-1/"/>
     <id>http://blog.tablu.com/Techniques/hibernate-learning-1/</id>
     <published>2020-07-18T20:33:57.000Z</published>
-    <updated>2020-07-18T14:45:43.728Z</updated>
+    <updated>2020-07-21T02:05:25.656Z</updated>
     
     <summary type="html">
     
@@ -64,7 +85,7 @@
       <category term="Techniques" scheme="http://blog.tablu.com/categories/Techniques/"/>
     
     
-      <category term="Code" scheme="http://blog.tablu.com/tags/Code/"/>
+      <category term="Hibernate" scheme="http://blog.tablu.com/tags/Hibernate/"/>
     
   </entry>
   
