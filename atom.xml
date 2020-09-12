@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.tablu.com/"/>
-  <updated>2020-07-22T06:10:15.261Z</updated>
+  <updated>2020-09-12T05:05:54.778Z</updated>
   <id>http://blog.tablu.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>double pointer</title>
+    <link href="http://blog.tablu.com/Algorithm-Thought/double-pointer/"/>
+    <id>http://blog.tablu.com/Algorithm-Thought/double-pointer/</id>
+    <published>2020-09-12T10:43:47.000Z</published>
+    <updated>2020-09-12T05:05:54.778Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;双指针问题&quot;&gt;&lt;a href=&quot;#双指针问题&quot; class=&quot;headerlink&quot; title=&quot;双指针问题&quot;&gt;&lt;/a&gt;双指针问题&lt;/h2&gt;&lt;p&gt;结合&lt;a href=&quot;https://cyc2018.github.io/CS-Notes/#/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E5%8F%8C%E6%8C%87%E9%92%88&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CS-Notes&lt;/a&gt;，对于LeetCode面试常见的双指针问题，分享一些心得体会。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Algorithm Thought" scheme="http://blog.tablu.com/categories/Algorithm-Thought/"/>
+    
+    
+      <category term="LeetCode" scheme="http://blog.tablu.com/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>hibernate learning 3</title>
@@ -63,11 +84,11 @@
     <link href="http://blog.tablu.com/Techniques/hibernate-learning-1/"/>
     <id>http://blog.tablu.com/Techniques/hibernate-learning-1/</id>
     <published>2020-07-18T20:33:57.000Z</published>
-    <updated>2020-07-22T06:19:35.236Z</updated>
+    <updated>2020-09-12T02:39:06.116Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Hibernate-学习（一）&quot;&gt;&lt;a href=&quot;#Hibernate-学习（一）&quot; class=&quot;headerlink&quot; title=&quot;Hibernate 学习（一）&quot;&gt;&lt;/a&gt;Hibernate 学习（一）&lt;/h2&gt;&lt;h3 id=&quot;Hibernate简介&quot;&gt;&lt;a href=&quot;#Hibernate简介&quot; class=&quot;headerlink&quot; title=&quot;Hibernate简介&quot;&gt;&lt;/a&gt;Hibernate简介&lt;/h3&gt;&lt;p&gt;Hibernate是一个开源ORM框架，底层是JDBC，应用于JavaEE的dao层，优点是不用写SQL，缺点是涉及SQL级别的调优学习成本高。&lt;/p&gt;
+      &lt;h2 id=&quot;Hibernate学习（一）&quot;&gt;&lt;a href=&quot;#Hibernate学习（一）&quot; class=&quot;headerlink&quot; title=&quot;Hibernate学习（一）&quot;&gt;&lt;/a&gt;Hibernate学习（一）&lt;/h2&gt;&lt;h3 id=&quot;Hibernate简介&quot;&gt;&lt;a href=&quot;#Hibernate简介&quot; class=&quot;headerlink&quot; title=&quot;Hibernate简介&quot;&gt;&lt;/a&gt;Hibernate简介&lt;/h3&gt;&lt;p&gt;Hibernate是一个开源ORM框架，底层是JDBC，应用于JavaEE的dao层，优点是不用写SQL，缺点是涉及SQL级别的调优学习成本高。&lt;/p&gt;
     
     </summary>
     
