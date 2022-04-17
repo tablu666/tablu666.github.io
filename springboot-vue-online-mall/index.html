@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Spring Boot &amp; Vue Online mall - Tianbo Lu</title><meta name="Description" content="Online shopping mall, Java 8, REST API."><meta property="og:title" content="Spring Boot &amp; Vue Online mall" />
+<meta property="og:description" content="Online shopping mall, Java 8, REST API." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/springboot-vue-online-mall/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-16T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="Spring Boot &amp; Vue Online mall"/>
+<meta name="twitter:description" content="Online shopping mall, Java 8, REST API."/>
+<meta name="application-name" content="Tianbo Lu">
+<meta name="apple-mobile-web-app-title" content="Tianbo Lu"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/springboot-vue-online-mall/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Spring Boot \u0026 Vue Online mall",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/springboot-vue-online-mall\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/example.com\/images\/Apple-Devices-Preview.png",
+                            "width":  451 ,
+                            "height":  451 
+                        }],"genre": "posts","keywords": "technique, web","wordcount":  163 ,
+        "url": "https:\/\/example.com\/springboot-vue-online-mall\/","datePublished": "2022-04-16T00:00:00+00:00","dateModified": "2020-04-16T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.png",
+                    "width":  451 ,
+                    "height":  451 
+                }},"author": {
+                "@type": "Person",
+                "name": "Tianbo Lu"
+            },"description": "Online shopping mall, Java 8, REST API."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Tianbo Lu">Tianbo Lu</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/project/"> Project </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/springboot-vue-online-mall/" selected>English</option><option value="/zh-cn/springboot-vue-online-mall/">简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Tianbo Lu">Tianbo Lu</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/project/" title="">Project</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/springboot-vue-online-mall/" selected>English</option><option value="/zh-cn/springboot-vue-online-mall/">简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Spring Boot &amp; Vue Online mall</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/tablu666/springboot-vue-online-mall" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Tianbo Lu</a></span>&nbsp;<span class="post-category">included in <a href="/categories/project/"><i class="far fa-folder fa-fw"></i>Project</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-16">2022-04-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;163 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#intro">Intro</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#a-full-stack-web-application-using-spring-boot-and-vue-cli">A full-stack web application using Spring boot and Vue Cli.</a></li>
+            <li><a href="#live-demo-httpstvmall-tabluherokuappcomhttpstvmall-tabluherokuappcom">Live Demo: <a href="https://tvmall-tablu.herokuapp.com/">https://tvmall-tablu.herokuapp.com/</a></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#screenshot">Screenshot</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#technology-stacks">Technology Stacks</a></li>
+    <li><a href="#database-schema">Database Schema</a></li>
+    <li><a href="#rapid-deployment--run">Rapid deployment &amp; Run</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="e-commerce-website">E-commerce website</h1>
+<h2 id="intro">Intro</h2>
+<h4 id="a-full-stack-web-application-using-spring-boot-and-vue-cli">A full-stack web application using Spring boot and Vue Cli.</h4>
+<blockquote>
+<p>This is an online shopping application with frontend and backend separated which is mainly developed for consumers, it also includes simple order &amp; user management backend services.
+The frontend calls the backend API and performs data interaction through JSON.</p>
+</blockquote>
+<h4 id="live-demo-httpstvmall-tabluherokuappcomhttpstvmall-tabluherokuappcom">Live Demo: <a href="https://tvmall-tablu.herokuapp.com/" target="_blank" rel="noopener noreffer">https://tvmall-tablu.herokuapp.com/</a></h4>
+<h2 id="screenshot">Screenshot</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="index-login.png"
+        data-srcset="index-login.png, index-login.png 1.5x, index-login.png 2x"
+        data-sizes="auto"
+        alt="index-login.png"
+        title="index-login.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="cart.jpg"
+        data-srcset="/springboot-vue-online-mall/cart.jpg, cart.jpg 1.5x, /springboot-vue-online-mall/cart.jpg 2x"
+        data-sizes="auto"
+        alt="/springboot-vue-online-mall/cart.jpg"
+        title="/springboot-vue-online-mall/cart.jpg" /></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>REST API</li>
+<li>Full JSON interaction</li>
+<li>Redis-based shopping cart</li>
+<li>Order process</li>
+<li>Categories</li>
+<li>Pagination</li>
+</ul>
+<h2 id="technology-stacks">Technology Stacks</h2>
+<p><strong>Backend</strong></p>
+<ul>
+<li>Java 8</li>
+<li>Spring Boot 2.1.7</li>
+<li>Mybatis</li>
+<li>MySQL</li>
+<li>Redis</li>
+<li>Spring Security</li>
+<li>Maven</li>
+</ul>
+<p><strong>Frontend</strong></p>
+<ul>
+<li>Vue CLI 4.5.4</li>
+</ul>
+<h2 id="database-schema">Database Schema</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="schema.png"
+        data-srcset="/springboot-vue-online-mall/schema.png, schema.png 1.5x, /springboot-vue-online-mall/schema.png 2x"
+        data-sizes="auto"
+        alt="/springboot-vue-online-mall/schema.png"
+        title="/springboot-vue-online-mall/schema.png" /></p>
+<h2 id="rapid-deployment--run">Rapid deployment &amp; Run</h2>
+<p><strong>Backend</strong></p>
+<ol>
+<li>Install <a href="https://dev.mysql.com/downloads/mysql/5.7.html" target="_blank" rel="noopener noreffer">MySQL</a></li>
+<li>Create a local database like &lsquo;mall&rsquo; using MySQL Workbench or Navicat</li>
+<li>Execute SQL statement to build table. (<code>cd backend/src/main/resources/sql</code>)</li>
+<li>Prepare <a href="https://redis.io/" target="_blank" rel="noopener noreffer">Redis</a></li>
+<li>Configure spring datasource &amp; Redis in <code>application.yml</code></li>
+<li>The server is running on localhost:8080</li>
+</ol>
+<p><strong>Frontend</strong></p>
+<ol>
+<li>Install <a href="https://www.npmjs.com/get-npm" target="_blank" rel="noopener noreffer">Node.js and npm</a></li>
+<li><code>cd frontend</code></li>
+<li>Run <code>npm install</code></li>
+<li>Run <code>npm run serve</code></li>
+<li>The client is running on localhost:8081</li>
+</ol>
+<p>Note: it only works locally, some codes should be modified before production mode.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-04-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/springboot-vue-online-mall/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://example.com/springboot-vue-online-mall/" data-title="Spring Boot &amp; Vue Online mall" data-hashtags="technique,web"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://example.com/springboot-vue-online-mall/" data-hashtag="technique"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://example.com/springboot-vue-online-mall/" data-title="Spring Boot &amp; Vue Online mall" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://example.com/springboot-vue-online-mall/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://example.com/springboot-vue-online-mall/" data-title="Spring Boot &amp; Vue Online mall"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/technique/">technique</a>,&nbsp;<a href="/tags/web/">web</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/css/lightgallery.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.2.0/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.2.0/dist/js/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-thumbnail.js@1.2.0/dist/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lg-zoom.js@1.2.0/dist/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.en","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
