@@ -2,84 +2,84 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://example.com/springboot-vue-online-mall/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/springboot-vue-online-mall/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/springboot-vue-online-mall/"
+                        href="https://github.com/tablu666/zh-cn/springboot-vue-online-mall/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/springboot-vue-online-mall/"
+                    href="https://github.com/tablu666/springboot-vue-online-mall/"
                     /></url><url>
-            <loc>https://example.com/about/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://github.com/tablu666/about/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/about/"
+                        href="https://github.com/tablu666/zh-cn/about/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/about/"
+                    href="https://github.com/tablu666/about/"
                     /></url><url>
-            <loc>https://example.com/categories/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/categories/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/categories/"
+                        href="https://github.com/tablu666/zh-cn/categories/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/categories/"
+                    href="https://github.com/tablu666/categories/"
                     /></url><url>
-            <loc>https://example.com/posts/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/posts/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/posts/"
+                        href="https://github.com/tablu666/zh-cn/posts/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/posts/"
+                    href="https://github.com/tablu666/posts/"
                     /></url><url>
-            <loc>https://example.com/categories/project/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/categories/project/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/categories/project/"
+                        href="https://github.com/tablu666/zh-cn/categories/project/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/categories/project/"
+                    href="https://github.com/tablu666/categories/project/"
                     /></url><url>
-            <loc>https://example.com/tags/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/tags/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/tags/"
+                        href="https://github.com/tablu666/zh-cn/tags/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/tags/"
+                    href="https://github.com/tablu666/tags/"
                     /></url><url>
-            <loc>https://example.com/tags/technique/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/tags/technique/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/tags/technique/"
+                        href="https://github.com/tablu666/zh-cn/tags/technique/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/tags/technique/"
+                    href="https://github.com/tablu666/tags/technique/"
                     /></url><url>
-            <loc>https://example.com/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/"
+                        href="https://github.com/tablu666/zh-cn/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/"
+                    href="https://github.com/tablu666/"
                     /></url><url>
-            <loc>https://example.com/tags/web/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://github.com/tablu666/tags/web/</loc><lastmod>2020-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="https://example.com/zh-cn/tags/web/"
+                        href="https://github.com/tablu666/zh-cn/tags/web/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="https://example.com/tags/web/"
+                    href="https://github.com/tablu666/tags/web/"
                     /></url></urlset>

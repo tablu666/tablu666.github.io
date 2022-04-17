@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>technique - Tag - Tianbo Lu</title>
-        <link>https://example.com/tags/technique/</link>
+        <link>https://github.com/tablu666/tags/technique/</link>
         <description>technique - Tag - Tianbo Lu</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://example.com/tags/technique/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://github.com/tablu666/tags/technique/" rel="self" type="application/rss+xml" /><item>
     <title>Spring Boot &amp; Vue Online mall</title>
-    <link>https://example.com/springboot-vue-online-mall/</link>
+    <link>https://github.com/tablu666/springboot-vue-online-mall/</link>
     <pubDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://example.com/springboot-vue-online-mall/</guid>
+    <guid>https://github.com/tablu666/springboot-vue-online-mall/</guid>
     <description><![CDATA[E-commerce website Intro A full-stack web application using Spring boot and Vue Cli.  This is an online shopping application with frontend and backend separated which is mainly developed for consumers, it also includes simple order &amp; user management backend services. The frontend calls the backend API and performs data interaction through JSON.
  Live Demo: https://tvmall-tablu.herokuapp.com/ Screenshot Features  REST API Full JSON interaction Redis-based shopping cart Order process Categories Pagination  Technology Stacks Backend]]></description>
 </item></channel>
