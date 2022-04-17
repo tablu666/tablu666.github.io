@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>leetcode - Tag - Tianbo Lu</title>
+        <link>https://tablu666.github.io/tags/leetcode/</link>
+        <description>leetcode - Tag - Tianbo Lu</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://tablu666.github.io/tags/leetcode/" rel="self" type="application/rss+xml" /><item>
+    <title>Double Pointer Algorithm</title>
+    <link>https://tablu666.github.io/double-pointer/</link>
+    <pubDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://tablu666.github.io/double-pointer/</guid>
+    <description><![CDATA[Double Pointer Problems According to CS-Notes, I want to share some thoughts about 6 common double pointer problems on Leetcode.
+Sorted Array - Two Sum 167. Two Sum II - Input array is sorted (Easy)
+Problem: Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.]]></description>
+</item></channel>
+</rss>

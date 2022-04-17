@@ -11,6 +11,15 @@
                     hreflang="zh-cn"
                     href="https://tablu666.github.io/zh-cn/springboot-vue-online-mall/"
                     /></url><url>
+            <loc>https://tablu666.github.io/zh-cn/double-pointer/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://tablu666.github.io/double-pointer/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://tablu666.github.io/zh-cn/double-pointer/"
+                    /></url><url>
             <loc>https://tablu666.github.io/zh-cn/categories/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -57,6 +66,8 @@
                     href="https://tablu666.github.io/zh-cn/about/"
                     /></url><url>
             <loc>https://tablu666.github.io/zh-cn/tags/%E6%8A%80%E6%9C%AF/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://tablu666.github.io/zh-cn/tags/%E5%8A%9B%E6%89%A3/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://tablu666.github.io/zh-cn/categories/%E7%AE%97%E6%B3%95/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://tablu666.github.io/zh-cn/tags/%E7%BD%91%E9%A1%B5/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://tablu666.github.io/zh-cn/categories/project/</loc><lastmod>2022-04-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
@@ -75,6 +86,24 @@
                     rel="alternate"
                     hreflang="zh-cn"
                     href="https://tablu666.github.io/zh-cn/tags/technique/"
+                    /></url><url>
+            <loc>https://tablu666.github.io/zh-cn/tags/leetcode/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://tablu666.github.io/tags/leetcode/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://tablu666.github.io/zh-cn/tags/leetcode/"
+                    /></url><url>
+            <loc>https://tablu666.github.io/zh-cn/categories/algorithm/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://tablu666.github.io/categories/algorithm/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://tablu666.github.io/zh-cn/categories/algorithm/"
                     /></url><url>
             <loc>https://tablu666.github.io/zh-cn/tags/web/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"

@@ -11,5 +11,15 @@
     <guid>https://tablu666.github.io/springboot-vue-online-mall/</guid>
     <description><![CDATA[E-commerce website Intro A full-stack web application using Spring boot and Vue Cli.  This is an online shopping application with frontend and backend separated which is mainly developed for consumers, it also includes simple order &amp; user management backend services. The frontend calls the backend API and performs data interaction through JSON.
  Live Demo: https://tvmall-tablu.herokuapp.com/ Screenshot Features  REST API Full JSON interaction Redis-based shopping cart Order process Categories Pagination  Technology Stacks Backend]]></description>
+</item><item>
+    <title>Double Pointer Algorithm</title>
+    <link>https://tablu666.github.io/double-pointer/</link>
+    <pubDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://tablu666.github.io/double-pointer/</guid>
+    <description><![CDATA[Double Pointer Problems According to CS-Notes, I want to share some thoughts about 6 common double pointer problems on Leetcode.
+Sorted Array - Two Sum 167. Two Sum II - Input array is sorted (Easy)
+Problem: Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
+The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.]]></description>
 </item></channel>
 </rss>

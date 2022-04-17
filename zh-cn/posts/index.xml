@@ -10,5 +10,12 @@
     <author>作者</author>
     <guid>https://tablu666.github.io/zh-cn/springboot-vue-online-mall/</guid>
     <description><![CDATA[网上商城 简介 一个使用Spring Boot和Vue Cli的全栈网页应用 这是一个前后端分离的在线商城应用，它主要服务于消费者，包括简单的订单&a]]></description>
+</item><item>
+    <title>双指针算法</title>
+    <link>https://tablu666.github.io/zh-cn/double-pointer/</link>
+    <pubDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://tablu666.github.io/zh-cn/double-pointer/</guid>
+    <description><![CDATA[双指针问题 结合CS-Notes，对于LeetCode面试常见的双指针问题，分享一些心得体会。 有序数组 Two Sum 167. Two Sum II - Input array is sorted (Easy) Problem: Given an array of integers that is]]></description>
 </item></channel>
 </rss>
