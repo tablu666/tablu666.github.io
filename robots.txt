@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://github.com/sitemap.xml
+Sitemap: https://tablu666.github.io/sitemap.xml

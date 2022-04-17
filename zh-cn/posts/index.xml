@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>所有文章 - Tianbo Lu</title>
-        <link>https://github.com/tablu666/zh-cn/posts/</link>
+        <link>https://tablu666.github.io/zh-cn/posts/</link>
         <description>所有文章 | Tianbo Lu</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://github.com/tablu666/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://tablu666.github.io/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Spring Boot &amp; Vue 网上商城</title>
-    <link>https://github.com/tablu666/zh-cn/springboot-vue-online-mall/</link>
+    <link>https://tablu666.github.io/zh-cn/springboot-vue-online-mall/</link>
     <pubDate>Sat, 16 Apr 2022 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://github.com/tablu666/zh-cn/springboot-vue-online-mall/</guid>
+    <guid>https://tablu666.github.io/zh-cn/springboot-vue-online-mall/</guid>
     <description><![CDATA[网上商城 简介 一个使用Spring Boot和Vue Cli的全栈网页应用 这是一个前后端分离的在线商城应用，它主要服务于消费者，包括简单的订单&a]]></description>
 </item></channel>
 </rss>
